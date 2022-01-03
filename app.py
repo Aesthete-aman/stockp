@@ -619,6 +619,6 @@ def first_output(n_clicks):
     
 #------------------------------------------------------
 
-if ___ == '__main__':
+if __name__ == '__main__':
     app.run_server()
 
