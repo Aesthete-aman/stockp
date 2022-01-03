@@ -245,11 +245,11 @@ def first_output(n_clicks,days,ticker):
             #Converting the datatype
             days = int(days)
 
-            #Creating initial dataframe
+            '''#Creating initial dataframe
             apple_stocks_static = yf.download(ticker,'2015-01-01',datetime.now().strftime("%Y-%m-%d"))
             apple_stocks_static.reset_index(inplace=True)
             apple_stocks_static = apple_stocks_static[["Date","Close"]]
-            apple_stocks_static =apple_stocks_static.rename(columns={"Date":"Date","Close":"Actual Values"})
+            apple_stocks_static =apple_stocks_static.rename(columns={"Date":"Date","Close":"Actual Values"})'''
             
             #Creating Static Dataframe
             Serial_no = []
@@ -456,11 +456,11 @@ def first_output(n_clicks,ticker):
                 
                         ticker = tickers_list[i]
                 
-                        #Creating initial dataframe
+                        '''#Creating initial dataframe
                         apple_stocks_static = yf.download(ticker,'2015-01-01',datetime.now().strftime("%Y-%m-%d"))
                         apple_stocks_static.reset_index(inplace=True)
                         apple_stocks_static = apple_stocks_static[["Date","Close"]]
-                        apple_stocks_static =apple_stocks_static.rename(columns={"Date":"Date","Close":"Actual Values"})
+                        apple_stocks_static =apple_stocks_static.rename(columns={"Date":"Date","Close":"Actual Values"})'''
     
 
                         for split_condition in range(1):
