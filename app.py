@@ -244,12 +244,6 @@ def first_output(n_clicks,days,ticker):
             
             #Converting the datatype
             days = int(days)
-
-            '''#Creating initial dataframe
-            apple_stocks_static = yf.download(ticker,'2015-01-01',datetime.now().strftime("%Y-%m-%d"))
-            apple_stocks_static.reset_index(inplace=True)
-            apple_stocks_static = apple_stocks_static[["Date","Close"]]
-            apple_stocks_static =apple_stocks_static.rename(columns={"Date":"Date","Close":"Actual Values"})'''
             
             #Creating Static Dataframe
             Serial_no = []
@@ -259,7 +253,7 @@ def first_output(n_clicks,days,ticker):
             dict = {'Serial_No':Serial_no}
             final_data = pd.DataFrame(dict)
 
-            for split_condition in range(1):
+            for split_condition in range(0,1):
 
                 #On the basis of Split condition defining the starting date:
                 if split_condition == 0:
@@ -292,7 +286,7 @@ def first_output(n_clicks,days,ticker):
                 final_data['Date'] = list(prediction['ds'])
 
             #Ensemble Model
-            final_data['Stock Value Prediction'] = (final_data['Prediction0'])
+            final_data['Stock Value Prediction'] = final_data['Prediction1']
 
             #Plotting the Data
             fig = px.line(final_data,x='Date',y='Stock Value Prediction')
@@ -400,6 +394,7 @@ def first_output(n_clicks,ticker):
     
     global perf_stats_all
     global plot_data
+    global company_values
     
     if n_clicks>0:
         
@@ -431,7 +426,9 @@ def first_output(n_clicks,ticker):
                     if tickers_list[i] == str(ticker_data.iloc[iter_,1]):
                         company.append(ticker_data.iloc[iter_,2])
                         break
-        
+            
+            company_values = company
+            
             output_div_results = "Returning Stock Analyses and Ratios for Selected Companies"
             output_div = html.Div(id='output-box-div',children=[html.Div(children=[html.H6(id='output-box',children=output_div_results)],style={"text-align": "center","height":"50px"})])
             
@@ -455,14 +452,7 @@ def first_output(n_clicks,ticker):
             for i in range(len(tickers_list)):
                 
                         ticker = tickers_list[i]
-                
-                        '''#Creating initial dataframe
-                        apple_stocks_static = yf.download(ticker,'2015-01-01',datetime.now().strftime("%Y-%m-%d"))
-                        apple_stocks_static.reset_index(inplace=True)
-                        apple_stocks_static = apple_stocks_static[["Date","Close"]]
-                        apple_stocks_static =apple_stocks_static.rename(columns={"Date":"Date","Close":"Actual Values"})'''
     
-
                         for split_condition in range(1):
 
                             #On the basis of Split condition defining the starting date:
@@ -505,7 +495,7 @@ def first_output(n_clicks,ticker):
             fig = px.line(final_data,x='Date',y='Stock Value Prediction',color='Company')
                         
             fig.update_layout(width=450, height=377) 
-            fig.update_layout(showlegend=False)
+            fig.update_layout(showlegend=False,title="Pair wise Stock Analysis")
             fig = dcc.Graph(figure=fig)
             
             
@@ -589,7 +579,8 @@ def first_output(n_clicks):
         pf.plot_rolling_returns(bt_returns)
         plt.subplot(3,3,7)
         pf.plot_rolling_sharpe(bt_returns)
-
+        
+        fig.suptitle('Plots for Pair Wise Stock Analysis for {}'.format(company_values), fontsize=16)
 
 
         #plt.tight_layout()
@@ -617,6 +608,7 @@ def first_output(n_clicks):
         s = s.to_frame()
         return [dcc.send_data_frame(s.to_csv, "Pair-Trade Statistics.csv")]        
     
+#------------------------------------------------------
 #------------------------------------------------------
 
 if __name__ == '__main__':
