@@ -286,7 +286,7 @@ def first_output(n_clicks,days,ticker):
                 final_data['Date'] = list(prediction['ds'])
 
             #Ensemble Model
-            final_data['Stock Value Prediction'] = final_data['Prediction1']
+            final_data['Stock Value Prediction'] = final_data['Prediction0']
 
             #Plotting the Data
             fig = px.line(final_data,x='Date',y='Stock Value Prediction')
