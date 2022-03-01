@@ -273,9 +273,9 @@ def first_output(n_clicks,days,ticker):
 
 
                 #Fitting the Facebook Prophet Model
-                m = Prophet(daily_seasonality=True)
+                m = Prophet(uncertainty_samples=None,daily_seasonality=True)
                 m.fit(training_data) 
-                future = m.make_future_dataframe(periods=days)
+                future = m.make_future_dataframe(periods=days, freq='W', include_history=False)
                 forecast = m.predict(future)
 
 
@@ -473,9 +473,9 @@ def first_output(n_clicks,ticker):
 
 
                             #Fitting the Facebook Prophet Model
-                            m = Prophet(daily_seasonality=True)
+                            m = Prophet(uncertainty_samples=None,daily_seasonality=True)
                             m.fit(training_data) 
-                            future = m.make_future_dataframe(periods=180)
+                            future = m.make_future_dataframe(periods=180, freq='W', include_history=False)
                             forecast = m.predict(future)
 
 
@@ -606,7 +606,7 @@ def first_output(n_clicks):
         
         s = pd.Series(perf_stats_all,name="Value")
         s = s.to_frame()
-        return [dcc.send_data_frame(s.to_csv, "Pair-Trade Statistics.csv")]        
+        return [dcc.send_data_frame(s.to_csv, "Pair-Trade Statistics.csv")]         
     
 #------------------------------------------------------
 #------------------------------------------------------
