@@ -432,7 +432,7 @@ def first_output(n_clicks,ticker):
             output_div_results = "Returning Stock Analyses and Ratios for Selected Companies"
             output_div = html.Div(id='output-box-div',children=[html.Div(children=[html.H6(id='output-box',children=output_div_results)],style={"text-align": "center","height":"50px"})])
             
-            '''#Getting the Stocks Data and doing the predictions using Prophet
+            #Getting the Stocks Data and doing the predictions using Prophet
             today = DT.date.today()
             
             Serial_no = []
@@ -488,14 +488,14 @@ def first_output(n_clicks,ticker):
             
             
             final_data['Stock Value Prediction'] = predictions
-            final_data['Date'] = date'''
+            final_data['Date'] = date
 
                             
             #Plotting the Data
-            fig = pf.plot_monthly_returns_heatmap(plot_data)
+            fig = px.line(final_data,x='Date',y='Stock Value Prediction',color='Company')
                         
-            #fig.update_layout(width=450, height=377) 
-            #fig.update_layout(showlegend=False,title="Monthly Returns of Selected Stocks")
+            fig.update_layout(width=450, height=377) 
+            fig.update_layout(showlegend=False,title="Pair wise Stock Analysis")
             fig = dcc.Graph(figure=fig)
             
             
@@ -613,4 +613,3 @@ def first_output(n_clicks):
 
 if __name__ == '__main__':
     app.run_server()
-
