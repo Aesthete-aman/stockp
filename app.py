@@ -275,7 +275,7 @@ def first_output(n_clicks,days,ticker):
                 #Fitting the Facebook Prophet Model
                 m = Prophet(uncertainty_samples=None,daily_seasonality=True)
                 m.fit(training_data) 
-                future = m.make_future_dataframe(periods=days, freq='W', include_history=False)
+                future = m.make_future_dataframe(periods=days, include_history=False)
                 forecast = m.predict(future)
 
 
@@ -475,7 +475,7 @@ def first_output(n_clicks,ticker):
                             #Fitting the Facebook Prophet Model
                             m = Prophet(uncertainty_samples=None,daily_seasonality=True)
                             m.fit(training_data) 
-                            future = m.make_future_dataframe(periods=180, freq='W', include_history=False)
+                            future = m.make_future_dataframe(periods=180, include_history=False)
                             forecast = m.predict(future)
 
 
