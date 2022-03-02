@@ -494,8 +494,8 @@ def first_output(n_clicks,ticker):
             #Plotting the Data
             fig = pf.plot_monthly_returns_heatmap(plot_data)
                         
-            fig.update_layout(width=450, height=377) 
-            fig.update_layout(showlegend=False,title="Monthly Returns of Selected Stocks")
+            #fig.update_layout(width=450, height=377) 
+            #fig.update_layout(showlegend=False,title="Monthly Returns of Selected Stocks")
             fig = dcc.Graph(figure=fig)
             
             
